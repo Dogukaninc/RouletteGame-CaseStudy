@@ -13,6 +13,8 @@ namespace _RouletteGame.Utilities
         internal float Elapsed;
         internal Action OnCompleteCallback;
         internal bool IsAlive;
+        internal int Loops = 1;
+        internal int CompletedLoops;
 
         internal Tween(object target, float duration, Ease ease, Action<float> setter)
         {
@@ -31,6 +33,12 @@ namespace _RouletteGame.Utilities
             return this;
         }
 
+        public Tween SetLoops(int loops)
+        {
+            Loops = loops;
+            return this;
+        }
+
         public void Kill()
         {
             IsAlive = false;
@@ -41,11 +49,24 @@ namespace _RouletteGame.Utilities
             Elapsed += deltaTime;
             float time = Duration <= 0f ? 1f : Mathf.Clamp01(Elapsed / Duration);
             Setter(Easing.Evaluate(Ease, time));
-            if (time >= 1f)
+
+            if (time < 1f) return;
+
+            if (Loops < 0)
             {
-                IsAlive = false;
-                OnCompleteCallback?.Invoke();
+                Elapsed -= Duration;
+                return;
             }
+
+            CompletedLoops++;
+            if (CompletedLoops < Loops)
+            {
+                Elapsed -= Duration;
+                return;
+            }
+
+            IsAlive = false;
+            OnCompleteCallback?.Invoke();
         }
     }
 }
