@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rouletteWheelRectTransform: {fileID: 9056383087086108781}
   spinButton: {fileID: 0}
-  _rotationDuration: 5
+  _rotationDuration: 25
 --- !u!1 &5793357693982310747
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 9098557598836576465, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
       propertyPath: m_textAlignment
       value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098557598836576465, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 9098557598836576465, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
       propertyPath: m_VerticalAlignment
@@ -873,7 +877,43 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8677006120927560665, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
     - {fileID: 5918355281270651474, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9098557598806708273, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599349920020, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599669499504, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599578298279, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557598690230596, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599734767982, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600718697304, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600150500985, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600027820060, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600121057950, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599321758201, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600478227837, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599922044121, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599230988778, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599622557391, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599273494060, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600007958274, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600211626542, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599915318833, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600554011573, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600307050314, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599517811134, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557598638806368, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599034856033, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600364265347, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599866998292, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599922320686, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599121653415, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600566131811, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557598680359451, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557598890291563, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600188673768, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600710144679, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557600617651170, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557598952323673, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
+    - {fileID: 9098557599505455050, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74cc0a85808095e40ae147e8fd3504a3, type: 3}
