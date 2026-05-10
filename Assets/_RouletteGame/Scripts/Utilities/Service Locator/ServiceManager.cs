@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using _Space_Shooter_Files.Scripts;
 using UnityEngine;
 
 namespace RouletteGame.Scripts
@@ -6,6 +7,9 @@ namespace RouletteGame.Scripts
     [DefaultExecutionOrder(-100)]
     public class ServiceManager : MonoBehaviour
     {
+        [RegisterService] [SerializeField] private BetManager _betManager;
+        [RegisterService] [SerializeField] private AudioManager _audioManager;
+        
         private void Awake()
         {
             AutoRegisterAllServices();

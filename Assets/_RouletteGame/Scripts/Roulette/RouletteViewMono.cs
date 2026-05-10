@@ -1,4 +1,5 @@
 ﻿using System;
+using _RouletteGame.Scripts;
 using _RouletteGame.Utilities;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace RouletteGame.Scripts
         [SerializeField] private Transform rouletteWheelRectTransform;
         [SerializeField] private Transform _slotsParent;
         [SerializeField] private Transform _ball;
+        [SerializeField] private Transform _resultPoint;
         [SerializeField] private Transform _ballMesh;
         [SerializeField] private float _slotOrbitRadius = 0.0275f;
         [SerializeField] private float _slotDistanceThresholdMultiplier = 1f;
@@ -27,9 +29,15 @@ namespace RouletteGame.Scripts
         [SerializeField] private float _rotationDuration;
         [SerializeField] private float _ballSpinDuration = 4f;
         [SerializeField, Min(1)] private int _ballSpinTurns = 5;
+        [SerializeField] private float _ballJumpHeight = 0.04f;
+        [SerializeField] private float _ballJumpStepDuration = 0.2f;
+        [SerializeField] private float _ballResetDuration = 0.6f;
         [SerializeField] private int _debugSelectedWheelNumber;
         [SerializeField] private Button _spinButton;
+        [SerializeField] private TMP_InputField _debugNumberInput;
+        
 
+        
         [Serializable]
         private struct WheelSlot
         {
@@ -39,21 +47,62 @@ namespace RouletteGame.Scripts
 
         [SerializeField] private WheelSlot[] _slots;
         private Tween _idleRotationTween;
+        private BetManager _betManager;
+        private Transform _ballInitialParent;
+        private Vector3 _ballInitialLocalPosition;
 
         private void Awake()
         {
             _spinButton.onClick.AddListener(RollRouletteBall);
+
+            _betManager = ServiceLocator.GetService<BetManager>();
+
+            if (_debugNumberInput != null)
+            {
+                _debugNumberInput.onEndEdit.AddListener(SetDebugSelectedNumber);
+            }
+
+            if (_ball != null)
+            {
+                _ballInitialParent = _ball.parent;
+                _ballInitialLocalPosition = _ball.localPosition;
+            }
         }
 
         private void OnDestroy()
         {
             _spinButton.onClick.RemoveListener(RollRouletteBall);
+
+            if (_debugNumberInput != null)
+            {
+                _debugNumberInput.onEndEdit.RemoveListener(SetDebugSelectedNumber);
+            }
+        }
+
+        private void SetDebugSelectedNumber(string input)
+        {
+            if (!int.TryParse(input, out int number)) return;
+            if (Array.IndexOf(_rouletteNumbers, (uint)number) < 0)
+            {
+                Debug.LogWarning($"Number {number} is not on the wheel");
+                return;
+            }
+            _debugSelectedWheelNumber = number;
         }
 
         private void Start()
         {
             RotateRouletteWheelIdle();
             InitializeWheelSlots();
+        }
+        
+        public void SetNumberDebugInput(string input)
+        
+        {
+            if (int.TryParse(input, out int number))
+            {
+                _debugSelectedWheelNumber = number;
+            }
         }
 
         private void InitializeWheelSlots()
@@ -113,7 +162,6 @@ namespace RouletteGame.Scripts
             Transform mesh = _ballMesh != null ? _ballMesh : (_ball.childCount > 0 ? _ball.GetChild(0) : null);
             if (mesh == null) return;
 
-            Transform wheel = rouletteWheelRectTransform;
             Transform slotTransform = _slotsParent.GetChild(slotIndex);
 
             Vector3 slotDelta = slotTransform.position - _slotsParent.position;
@@ -138,9 +186,68 @@ namespace RouletteGame.Scripts
             }, Ease.OutQuart).OnComplete(() =>
             {
                 Debug.Log($"Ball landed on number {targetNumber}");
-                _ball.SetParent(wheel, true);
+                JumpBallToResultPoint(() => OnRouletteStopped(targetNumber));
             });
         }
+
+        private void JumpBallToResultPoint(Action onComplete)
+        {
+            if (_resultPoint == null)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            _ball.SetParent(null, true);
+
+            Vector3 startPos = _ball.position;
+            Vector3 endPos = _resultPoint.position;
+            Vector3 apex = Vector3.Lerp(startPos, endPos, 0.5f) + Vector3.up * _ballJumpHeight;
+
+            _ball.DoMove(apex, _ballJumpStepDuration, Ease.Linear)
+                .OnComplete(() =>
+                {
+                    _ball.DoMove(_resultPoint.position, _ballJumpStepDuration, Ease.Linear)
+                        .OnComplete(() =>
+                        {
+                            _ball.SetParent(_resultPoint, false);
+                            onComplete?.Invoke();
+                        });
+                });
+        }
+
+        private void ResetBall()
+        {
+            if (_ball == null) return;
+
+            _ball.SetParent(_ballInitialParent, true);
+            _ball.DoLocalMove(_ballInitialLocalPosition, _ballResetDuration, Ease.InOutSine);
+        }
+
+        private void OnRouletteStopped(int winningNumber)
+        {
+            var allBets = _betManager.GetAllBets();
+            int totalStaked = 0;
+            int totalReturn = 0;
+
+            for (int i = 0; i < allBets.Count; i++)
+            {
+                var bet = allBets[i];
+                totalStaked += bet.totalBetAmount;
+
+                if (Array.IndexOf(bet.GetWinnerNumbers(), winningNumber) >= 0)
+                {
+                    totalReturn += BetRules.GetPayout(bet.betType, bet.totalBetAmount);
+                }
+            }
+
+            int netProfit = totalReturn - totalStaked;
+            PlayerStats.PlayerMoney += netProfit;
+
+            _betManager.ResetRound();
+            Invoke(nameof(ResetBall), 2f);
+        }
+
 
         private int FindSlotIndexByNumber(int number)
         {

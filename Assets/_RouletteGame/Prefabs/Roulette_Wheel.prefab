@@ -48,6 +48,7 @@ MonoBehaviour:
   rouletteWheelRectTransform: {fileID: 9056383087086108781}
   _slotsParent: {fileID: 8140164957328376355}
   _ball: {fileID: 2193592384097186774}
+  _resultPoint: {fileID: 2885461092824697902}
   _ballMesh: {fileID: 2885461092254830930}
   _slotOrbitRadius: 0.0275
   _slotDistanceThresholdMultiplier: 1
@@ -55,8 +56,12 @@ MonoBehaviour:
   _rotationDuration: 25
   _ballSpinDuration: 4
   _ballSpinTurns: 5
+  _ballJumpHeight: 0.04
+  _ballJumpStepDuration: 0.2
+  _ballResetDuration: 0.6
   _debugSelectedWheelNumber: 23
   _spinButton: {fileID: 0}
+  _debugNumberInput: {fileID: 0}
   _slots: []
 --- !u!1 &3476525524645819060
 GameObject:
@@ -163,6 +168,11 @@ Transform:
 --- !u!4 &2885461092254830930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2581194458868163517, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
+  m_PrefabInstance: {fileID: 853723758069052143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2885461092824697902 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2581194459438038721, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
   m_PrefabInstance: {fileID: 853723758069052143}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &9056383087086108781 stripped
