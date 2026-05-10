@@ -1,5 +1,6 @@
 ﻿using System;
 using _RouletteGame.Scripts;
+using _RouletteGame.Scripts.Events;
 using _RouletteGame.Utilities;
 using TMPro;
 using UnityEngine;
@@ -48,8 +49,8 @@ namespace RouletteGame.Scripts
         [SerializeField] private WheelSlot[] _slots;
         private Tween _idleRotationTween;
         private BetManager _betManager;
-        private Transform _ballInitialParent;
-        private Vector3 _ballInitialLocalPosition;
+        private Transform _ballMeshInitialParent;
+        private Vector3 _ballMeshInitialLocalPosition;
 
         private void Awake()
         {
@@ -62,10 +63,10 @@ namespace RouletteGame.Scripts
                 _debugNumberInput.onEndEdit.AddListener(SetDebugSelectedNumber);
             }
 
-            if (_ball != null)
+            if (_ballMesh != null)
             {
-                _ballInitialParent = _ball.parent;
-                _ballInitialLocalPosition = _ball.localPosition;
+                _ballMeshInitialParent = _ballMesh.parent;
+                _ballMeshInitialLocalPosition = _ballMesh.localPosition;
             }
         }
 
@@ -192,25 +193,25 @@ namespace RouletteGame.Scripts
 
         private void JumpBallToResultPoint(Action onComplete)
         {
-            if (_resultPoint == null)
+            if (_resultPoint == null || _ballMesh == null)
             {
                 onComplete?.Invoke();
                 return;
             }
 
-            _ball.SetParent(null, true);
+            _ballMesh.SetParent(null, true);
 
-            Vector3 startPos = _ball.position;
+            Vector3 startPos = _ballMesh.position;
             Vector3 endPos = _resultPoint.position;
             Vector3 apex = Vector3.Lerp(startPos, endPos, 0.5f) + Vector3.up * _ballJumpHeight;
 
-            _ball.DoMove(apex, _ballJumpStepDuration, Ease.Linear)
+            _ballMesh.DoMove(apex, _ballJumpStepDuration, Ease.Linear)
                 .OnComplete(() =>
                 {
-                    _ball.DoMove(_resultPoint.position, _ballJumpStepDuration, Ease.Linear)
+                    _ballMesh.DoMove(_resultPoint.position, _ballJumpStepDuration, Ease.Linear)
                         .OnComplete(() =>
                         {
-                            _ball.SetParent(_resultPoint, false);
+                            _ballMesh.SetParent(_resultPoint, true);
                             onComplete?.Invoke();
                         });
                 });
@@ -218,10 +219,10 @@ namespace RouletteGame.Scripts
 
         private void ResetBall()
         {
-            if (_ball == null) return;
+            if (_ballMesh == null) return;
 
-            _ball.SetParent(_ballInitialParent, true);
-            _ball.DoLocalMove(_ballInitialLocalPosition, _ballResetDuration, Ease.InOutSine);
+            _ballMesh.SetParent(_ballMeshInitialParent, true);
+            _ballMesh.DoLocalMove(_ballMeshInitialLocalPosition, _ballResetDuration, Ease.InOutSine);
         }
 
         private void OnRouletteStopped(int winningNumber)
@@ -243,6 +244,7 @@ namespace RouletteGame.Scripts
 
             int netProfit = totalReturn - totalStaked;
             PlayerStats.PlayerMoney += netProfit;
+            EventManager.Publish(new OnMoneyChanged(PlayerStats.PlayerMoney));
 
             _betManager.ResetRound();
             Invoke(nameof(ResetBall), 2f);
