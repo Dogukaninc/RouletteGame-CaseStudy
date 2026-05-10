@@ -81,18 +81,9 @@ MonoBehaviour:
   _ball: {fileID: 2193592384097186774}
   _resultPoint: {fileID: 2191594449209385181}
   _ballMesh: {fileID: 2885461092254830930}
-  _slotOrbitRadius: 0.0275
-  _slotDistanceThresholdMultiplier: 1
-  _slotAngularSpacingDeg: 0
-  _rotationDuration: 25
-  _ballSpinDuration: 4
-  _ballSpinTurns: 5
-  _ballJumpHeight: 0.04
-  _ballJumpStepDuration: 0.2
-  _ballResetDuration: 0.6
-  _debugSelectedWheelNumber: 23
   _spinButton: {fileID: 0}
   _debugNumberInput: {fileID: 0}
+  _rouletteConfigSo: {fileID: 11400000, guid: 3d6f1203f7be1a14f9b275708320c699, type: 2}
   _slots: []
 --- !u!1 &3476525524645819060
 GameObject:

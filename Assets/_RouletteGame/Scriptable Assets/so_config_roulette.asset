@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68190f750e14388ae8da787e5a65876, type: 3}
+  m_Name: so_config_roulette
+  m_EditorClassIdentifier: 
+  slotOrbitRadius: 0.0275
+  slotDistanceThresholdMultiplier: 1
+  slotAngularSpacingDeg: 0
+  rotationDuration: 0
+  ballSpinDuration: 4
+  ballSpinTurns: 5
+  ballJumpHeight: 0.04
+  ballJumpStepDuration: 0.2
+  ballResetDuration: 0.6
+  debugSelectedWheelNumber: 0
