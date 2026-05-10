@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RouletteGame.Scripts
 {
-    [DefaultExecutionOrder(-2)]
+    [DefaultExecutionOrder(-200)]
     public static class ServiceLocator
     {
         private static readonly Dictionary<Type, object> services = new Dictionary<Type, object>();

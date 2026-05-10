@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RouletteGame.Scripts
 {
-    [DefaultExecutionOrder(-1)]
+    [DefaultExecutionOrder(-100)]
     public class ServiceManager : MonoBehaviour
     {
         private void Awake()

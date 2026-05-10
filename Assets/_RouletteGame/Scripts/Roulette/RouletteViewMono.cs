@@ -23,8 +23,7 @@ namespace RouletteGame.Scripts
         [SerializeField] private Transform _ballMesh;
         [SerializeField] private float _slotOrbitRadius = 0.0275f;
         [SerializeField] private float _slotDistanceThresholdMultiplier = 1f;
-        [SerializeField, Tooltip("0 = otomatik (360/slot sayısı). >0 ise iki slot arasındaki açıyı zorlar.")]
-        private float _slotAngularSpacingDeg = 0f;
+        [SerializeField] private float _slotAngularSpacingDeg = 0f;
         [SerializeField] private float _rotationDuration;
         [SerializeField] private float _ballSpinDuration = 4f;
         [SerializeField, Min(1)] private int _ballSpinTurns = 5;

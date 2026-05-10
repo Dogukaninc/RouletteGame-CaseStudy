@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4520178823275670625}
   - component: {fileID: 3915281367406766975}
   - component: {fileID: 3848208737129637783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bet_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -79,7 +79,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2526984462235646736}
   - component: {fileID: 9063876813381571875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vfx_highlight_effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,8 +95,8 @@ Transform:
   m_GameObject: {fileID: 5173593102959792888}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0049, y: -0.041, z: -0.0368}
-  m_LocalScale: {x: 1.0785689, y: 0.9164607, z: 1}
+  m_LocalPosition: {x: -0.0025, y: -0.041, z: -0.0228}
+  m_LocalScale: {x: 1.0559261, y: 0.871183, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4520178823275670625}
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SortingLayerID: -2066353629
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9469c6c1de33a64f9697241a7297c35, type: 3}
   m_Color: {r: 1, g: 0.94218117, b: 0, a: 0.16470589}
   m_FlipX: 0
   m_FlipY: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 5886801390046290612}
   - component: {fileID: 4406584799875456145}
   - component: {fileID: 301862006716892757}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: txt_number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
