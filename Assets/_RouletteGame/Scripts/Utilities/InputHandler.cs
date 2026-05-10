@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RouletteGame.Scripts;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace _RouletteGame.Utilities
@@ -23,31 +24,34 @@ namespace _RouletteGame.Utilities
 
             if (Input.GetMouseButtonDown(0))
             {
-                var clickPointOnWorld = GetRayHitPoint();
+                var betTile = GetClickedBetTile();
                 // Debug.Log("X: " + clickPointOnWorld.x +
                 //           "\n Y:" + clickPointOnWorld.y +
                 //           "\n Z: " + clickPointOnWorld.z);
-                if (clickPointOnWorld == Vector3.zero)
+                if (betTile == null)
                 {
-                    Debug.LogWarning("Click point is zero");
+                    Debug.LogWarning("betTile null");
                     return;
                 }
                 
-                GameStaticEvents.OnPlayerClickBet?.Invoke(clickPointOnWorld);
+                GameStaticEvents.OnPlayerClickBet?.Invoke(betTile);
             }
         }
 
-        private Vector3 GetRayHitPoint()
+        private BetTile GetClickedBetTile()
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, _maxRayDistance, _clickableLayer))
             {
-                return hit.transform.position;
+                if (hit.transform.TryGetComponent<BetTile>(out BetTile betTile))
+                {
+                    return betTile;
+                }
             }
 
-            return Vector3.zero;
+            return null;
         }
     }
 }

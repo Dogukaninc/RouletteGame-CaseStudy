@@ -47,7 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcbeebfd605b1d46a6096fa7c8fca17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chipsOnBet: []
   _numbers: 
+  _highlights:
+  - {fileID: 5173593102959792888}
 --- !u!65 &3848208737129637783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -85,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2526984462235646736
 Transform:
   m_ObjectHideFlags: 0
