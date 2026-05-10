@@ -41,6 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Highlight
+    uniqueID: 2228613667
+    locked: 0
+  - name: Numbers
+    uniqueID: 1960315205
+    locked: 0
+  - name: Chips
+    uniqueID: 2572291569
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
