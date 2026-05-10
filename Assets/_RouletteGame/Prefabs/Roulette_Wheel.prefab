@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &242267290660633592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2191594449209385181}
+  m_Layer: 0
+  m_Name: ResultPoint_1
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2191594449209385181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242267290660633592}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.021500004, z: 0.0014999971}
+  m_LocalScale: {x: 0.099999994, y: 0.09999998, z: 0.09999998}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9056383087086108781}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3371446384682893482
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,7 +79,7 @@ MonoBehaviour:
   rouletteWheelRectTransform: {fileID: 9056383087086108781}
   _slotsParent: {fileID: 8140164957328376355}
   _ball: {fileID: 2193592384097186774}
-  _resultPoint: {fileID: 2885461092824697902}
+  _resultPoint: {fileID: 2191594449209385181}
   _ballMesh: {fileID: 2885461092254830930}
   _slotOrbitRadius: 0.0275
   _slotDistanceThresholdMultiplier: 1
@@ -149,10 +180,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4710714870492218098, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
+    - {fileID: 2581194459438038782, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8536490988126597762, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8140164957328376355}
+    - targetCorrespondingSourceObject: {fileID: 8536490988126597762, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2191594449209385181}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
 --- !u!4 &214469584229294006 stripped
@@ -168,11 +203,6 @@ Transform:
 --- !u!4 &2885461092254830930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2581194458868163517, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
-  m_PrefabInstance: {fileID: 853723758069052143}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2885461092824697902 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2581194459438038721, guid: 6f2afc63d72f5774d90fef50e1785092, type: 3}
   m_PrefabInstance: {fileID: 853723758069052143}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &9056383087086108781 stripped

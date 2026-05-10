@@ -4,6 +4,7 @@ using _RouletteGame.Scripts.Events;
 using _RouletteGame.Utilities;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -24,20 +25,12 @@ namespace RouletteGame.Scripts
         [SerializeField] private Transform _ball;
         [SerializeField] private Transform _resultPoint;
         [SerializeField] private Transform _ballMesh;
-        [SerializeField] private float _slotOrbitRadius = 0.0275f;
-        [SerializeField] private float _slotDistanceThresholdMultiplier = 1f;
-        [SerializeField] private float _slotAngularSpacingDeg = 0f;
-        [SerializeField] private float _rotationDuration;
-        [SerializeField] private float _ballSpinDuration = 4f;
-        [SerializeField, Min(1)] private int _ballSpinTurns = 5;
-        [SerializeField] private float _ballJumpHeight = 0.04f;
-        [SerializeField] private float _ballJumpStepDuration = 0.2f;
-        [SerializeField] private float _ballResetDuration = 0.6f;
-        [SerializeField] private int _debugSelectedWheelNumber;
+        
+       
         [SerializeField] private Button _spinButton;
         [SerializeField] private TMP_InputField _debugNumberInput;
+        [SerializeField] private RouletteConfigSo _rouletteConfigSo;
         
-
         
         [Serializable]
         private struct WheelSlot
@@ -51,6 +44,18 @@ namespace RouletteGame.Scripts
         private BetManager _betManager;
         private Transform _ballMeshInitialParent;
         private Vector3 _ballMeshInitialLocalPosition;
+        
+        
+        private float _slotOrbitRadius;
+        private float _slotDistanceThresholdMultiplier;
+        private float _slotAngularSpacingDeg;
+        private float _rotationDuration;
+        private float _ballSpinDuration;
+        private int _ballSpinTurns;
+        private float _ballJumpHeight;
+        private float _ballJumpStepDuration;
+        private float _ballResetDuration;
+        private int _debugSelectedWheelNumber;
 
         private void Awake()
         {
@@ -68,6 +73,8 @@ namespace RouletteGame.Scripts
                 _ballMeshInitialParent = _ballMesh.parent;
                 _ballMeshInitialLocalPosition = _ballMesh.localPosition;
             }
+            
+            Initialize();
         }
 
         private void OnDestroy()
@@ -95,6 +102,20 @@ namespace RouletteGame.Scripts
         {
             RotateRouletteWheelIdle();
             InitializeWheelSlots();
+        }
+
+        private void Initialize()
+        {
+            _slotOrbitRadius = _rouletteConfigSo.slotOrbitRadius;
+            _slotDistanceThresholdMultiplier = _rouletteConfigSo.slotDistanceThresholdMultiplier;
+            _slotAngularSpacingDeg = _rouletteConfigSo.slotAngularSpacingDeg;
+            _rotationDuration = _rouletteConfigSo.rotationDuration;
+            _ballSpinDuration = _rouletteConfigSo.ballSpinDuration;
+            _ballJumpHeight = _rouletteConfigSo.ballJumpHeight;
+            _ballJumpStepDuration = _rouletteConfigSo.ballJumpStepDuration;
+            _ballResetDuration = _rouletteConfigSo.ballResetDuration;
+            _debugSelectedWheelNumber = _rouletteConfigSo.debugSelectedWheelNumber;
+            _ballSpinTurns = _rouletteConfigSo.ballSpinTurns;
         }
         
         public void SetNumberDebugInput(string input)
@@ -179,7 +200,10 @@ namespace RouletteGame.Scripts
 
             float deltaToTarget = Mathf.DeltaAngle(startBallY, targetBallY);
             float endBallY = startBallY + (_ballSpinTurns * 360f) + deltaToTarget;
-
+            
+            _resultPoint.transform.position = slotTransform.position + slotTransform.up * 0.01f;
+            _resultPoint.transform.SetParent(slotTransform, true);
+            
             TweenExtensions.DoFloat(startBallY, endBallY, _ballSpinDuration, y =>
             {
                 Vector3 e = _ball.eulerAngles;
@@ -222,7 +246,11 @@ namespace RouletteGame.Scripts
             if (_ballMesh == null) return;
 
             _ballMesh.SetParent(_ballMeshInitialParent, true);
-            _ballMesh.DoLocalMove(_ballMeshInitialLocalPosition, _ballResetDuration, Ease.InOutSine);
+            _ballMesh.DoLocalMove(_ballMeshInitialLocalPosition, _ballResetDuration, Ease.InOutSine).OnComplete(() =>
+            {
+                _resultPoint.SetParent(rouletteWheelRectTransform, true);
+                _resultPoint.position = rouletteWheelRectTransform.position;
+            });
         }
 
         private void OnRouletteStopped(int winningNumber)
@@ -248,6 +276,7 @@ namespace RouletteGame.Scripts
 
             _betManager.ResetRound();
             Invoke(nameof(ResetBall), 2f);
+           
         }
 
 
